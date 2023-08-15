@@ -315,6 +315,14 @@ export function RawList<T>(props: ListProps<T>, ref: React.Ref<ListRef>) {
     },
   );
 
+  const onMouseOver = () => {
+    scrollBarRef.current?.setScrollbarVisible();
+  }
+
+  const onMouseLeave = () => {
+     scrollBarRef.current?.delayHidden();
+  }
+
   React.useImperativeHandle(ref, () => ({
     scrollTo,
   }));
@@ -353,6 +361,8 @@ export function RawList<T>(props: ListProps<T>, ref: React.Ref<ListRef>) {
       }}
       className={mergedClassName}
       {...restProps}
+      onMouseOver={onMouseOver}
+      onMouseLeave={onMouseLeave}
     >
       <Component
         className={`${prefixCls}-holder`}

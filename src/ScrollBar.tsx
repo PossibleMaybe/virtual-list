@@ -72,6 +72,12 @@ export default class ScrollBar extends React.Component<ScrollBarProps, ScrollBar
     }, 2000);
   };
 
+  setScrollbarVisible = () => {
+    this.setState({
+      visible: true,
+    })
+  }
+
   onScrollbarTouchStart = (e: TouchEvent) => {
     e.preventDefault();
   };
@@ -110,6 +116,7 @@ export default class ScrollBar extends React.Component<ScrollBarProps, ScrollBar
       dragging: true,
       pageY: getPageY(e),
       startTop: this.getTop(),
+      visible: true,
     });
 
     onStartMove();
@@ -119,6 +126,7 @@ export default class ScrollBar extends React.Component<ScrollBarProps, ScrollBar
   };
 
   onMouseMove = (e: MouseEvent | TouchEvent) => {
+    this.setState({ visible: true })
     const { dragging, pageY, startTop } = this.state;
     const { onScroll } = this.props;
     raf.cancel(this.moveRaf);
